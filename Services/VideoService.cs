@@ -30,7 +30,7 @@ namespace MediafolioFrontend.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ICollection<Video>> GetAllVideosAsync()
+        public async Task<List<Video>> GetAllVideosAsync()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace MediafolioFrontend.Services
                 var response = await _httpClient.GetAsync($"{url}api/video");
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
-                ICollection<Video>? pageLoadResponse = JsonSerializer.Deserialize<List<Video>>
+                List<Video>? pageLoadResponse = JsonSerializer.Deserialize<List<Video>>
                 (
                     content,
                     new JsonSerializerOptions {PropertyNameCaseInsensitive = true}
@@ -52,7 +52,7 @@ namespace MediafolioFrontend.Services
                 {
                     return new List<Video>();
                 }
-                
+
             } catch (Exception)
             {
                 throw;

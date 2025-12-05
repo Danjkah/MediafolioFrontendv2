@@ -8,7 +8,7 @@ namespace MediafolioFrontend.Services
 {
     public interface IVideoService
     {
-        Task<ICollection<Video>> GetAllVideosAsync();
+        Task<List<Video>> GetAllVideosAsync();
 
         Task<Video?> GetVideoIdAsync(int id);
         Task<Video> CreateVideoAsync(CreateVideoDto videoDto);
