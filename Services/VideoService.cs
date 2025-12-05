@@ -59,9 +59,33 @@ namespace MediafolioFrontend.Services
             }
         }
 
-        public Task<Video?> GetVideoIdAsync(int id)
+        public async Task<Video?> GetVideoIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var url = _apiUrl;
+                var response = await _httpClient.GetAsync($"{url}api/video/{id}");
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                Video? pageLoadResponse = JsonSerializer.Deserialize<Video>
+                (
+                    content,
+                    new JsonSerializerOptions {PropertyNameCaseInsensitive = true}
+                );
+
+                if (pageLoadResponse != null)
+                {
+                    return pageLoadResponse;
+                }
+                else
+                {
+                    return new Video();
+                }
+
+            } catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<Video?> UpdateVideoAsync(int id, UpdateVideoDto videoDto)
