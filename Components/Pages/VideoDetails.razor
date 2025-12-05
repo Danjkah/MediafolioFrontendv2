@@ -1,0 +1,45 @@
+@page "/video/{videoId}"
+@using MediafolioFrontend.Services
+@using MediafolioFrontend.Models
+@using MediafolioFrontend.Enums
+
+@inject IVideoService videoService
+@inject NavigationManager navigation
+
+
+
+
+
+@code{
+    [Parameter]
+    public int videoId {get;set;} =int.MaxValue;
+
+    private Video? videoDetails = null;
+
+    private bool isLoading = false;
+
+    private string? errorMessage = null;
+
+    protected override async Task OnInitializedAsync(){
+        await LoadVideoDetails();
+    }
+
+    private async Task LoadVideoDetails(){
+        try{
+            isLoading = true;
+            errorMessage = null;
+            if (int.MaxValue == videoId)
+            {
+                errorMessage = "Invalid movie ID.";
+                return;
+            }            
+
+            videoDetails = await videoService.GetVideoIdAsync(videoId);
+
+        }catch(Exception ex)
+        {
+            errorMessage = ex.Message; 
+        }
+    }
+
+}

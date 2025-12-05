@@ -2,7 +2,7 @@
 @using MediafolioFrontend.Models
 @using MediafolioFrontend.Services
 @using MediafolioFrontend.Enums
-
+@rendermode InteractiveServer
 @inject IVideoService videoService
 @inject NavigationManager Navigation
 
@@ -10,16 +10,6 @@
 
 <div class="container mt-4">
     <h2>Your Video Entries</h2>
-
-
-
-
-
-
-
-
-
-
 
 
     @if (isLoading == true)
@@ -45,7 +35,7 @@
             @foreach(var video in videos)
             {
                 <div class = "col">
-                    <div class="card h-100 movie-card">
+                    <div class="card h-100 movie-card" @onclick="() => NavigateToDetails(video.Id)">
 
                         <div class = "no-poster">
                             <span>📽️</span>
@@ -77,8 +67,6 @@
 
         </div>
     }
-
-
 
 
 
@@ -124,4 +112,11 @@
     {
        await GetVideoEntries();
     }
+
+    private void NavigateToDetails(int videoId)
+    {
+        Console.WriteLine("something is happening");
+        Navigation.NavigateTo($"/video/{videoId}");
+    }
+
 }
