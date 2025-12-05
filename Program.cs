@@ -1,7 +1,7 @@
 using MediafolioFrontend.Components;
 using MediafolioFrontend.Components.Pages;
 using MediafolioFrontend.Services;
-using Mediafolio.Services;
+using MediafolioFrontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

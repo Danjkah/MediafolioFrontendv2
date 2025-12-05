@@ -1,9 +1,9 @@
 using System;
-using Mediafolio.DTOs;
-using Mediafolio.Models; 
+using MediafolioFrontend.DTOs;
+using MediafolioFrontend.Models; 
 
 
-namespace Mediafolio.Services;
+namespace MediafolioFrontend.Services;
 
 public interface IBookService
 {

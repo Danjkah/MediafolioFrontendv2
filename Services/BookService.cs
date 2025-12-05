@@ -1,9 +1,9 @@
 using System;
-using Mediafolio.DTOs;
-using Mediafolio.Models;
+using MediafolioFrontend.DTOs;
+using MediafolioFrontend.Models;
 using System.Text.Json;
 
-namespace Mediafolio.Services;
+namespace MediafolioFrontend.Services;
 
 public class BookService : IBookService
 {
@@ -35,11 +35,11 @@ public class BookService : IBookService
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            List<Mediafolio.Models.Book>? result = JsonSerializer.Deserialize<List<Mediafolio.Models.Book>>(content, new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+            List<MediafolioFrontend.Models.Book>? result = JsonSerializer.Deserialize<List<MediafolioFrontend.Models.Book>>(content, new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
 
             if(result == null)
             {
-                return new List<Mediafolio.Models.Book>();
+                return new List<MediafolioFrontend.Models.Book>();
             }
             return result;
         } 
