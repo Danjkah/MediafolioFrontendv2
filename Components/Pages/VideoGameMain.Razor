@@ -1,7 +1,7 @@
 @page "/videogame"
-@using Mediafolio.Services;
-@using Mediafolio.Models;
-@inject Mediafolio.Services.IVideoGameService VideoGameService;
+@using MediafolioFrontend.Services;
+@using MediafolioFrontend.Models;
+@inject MediafolioFrontend.Services.IVideoGameService VideoGameService;
 
 <PageTitle>Video Game Collection</PageTitle>
 
@@ -58,7 +58,7 @@
 
 @code 
 {
-    private List<Mediafolio.Models.VideoGame> videoGames = new List<Mediafolio.Models.VideoGame>();
+    private List<MediafolioFrontend.Models.VideoGame> videoGames = new List<MediafolioFrontend.Models.VideoGame>();
     private bool isLoading = false;
     private string? errorMessage = null;
 
@@ -70,7 +70,7 @@
             errorMessage = null;
             videoGames.Clear();
             
-            List<Mediafolio.Models.VideoGame>? results = await VideoGameService.GetAllGamesAsync();
+            List<MediafolioFrontend.Models.VideoGame>? results = await VideoGameService.GetAllGamesAsync();
 
             if(results is not null)
             {
