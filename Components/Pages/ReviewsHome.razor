@@ -3,12 +3,40 @@
 @using MediafolioFrontend.Models
 @using MediafolioFrontend.Enums
 @rendermode InteractiveServer
-@inject IVideoService videoService
+@inject IReviewService reviewService
 @inject NavigationManager navigation
 
 
 
+<div class = "row">
+    <button class = "btn btn-outline-primary mb-3" @onclick="() => GoBack(mediaId)">
+        ← Back to Video Entries
+    </button>
+    @foreach(var review in reviews)
+    {
+        @if (review.MediaObjectId == mediaId)
+        {
+            <div>
+            <h1>@review.Title</h1>
+                
+                
+                @review.Content
+                    
+                <br />
+                <small>
+                <strong>User Rating: </strong> @review.Rating /5 
+                </small>
+                <br />
+                <small>
+                <strong>Review Created At:</strong> @review.CreatedAt.ToString("MMMM dd, yyyy")
+                </small>
+                
+                
+            </div>
+        }
+    }
 
+</div>
 
 
 
@@ -16,4 +44,49 @@
 {
     [Parameter]
     public int mediaId {get;set;} = int.MaxValue;
+
+    private List<Reviews> reviews = new List<Reviews>();
+    private bool isLoading = false;
+
+    private string? errorMessage = null;
+
+    private bool hasSearched = false; 
+
+    private async Task GetVideoReviews()
+    {
+                try
+        {
+
+            isLoading = true;
+            errorMessage = null;
+            hasSearched = true; 
+
+            var loadResults = await reviewService.GetAllReviews();
+
+            reviews = loadResults;
+
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+
+    }
+    //https://stackoverflow.com/questions/61551404/in-blazor-how-to-call-a-function-at-page-load-event-name
+    protected override async Task OnInitializedAsync()
+    {
+       await GetVideoReviews();
+    }
+
+    private void GoBack(int videoId)
+    {
+
+        navigation.NavigateTo($"/video/{videoId}");
+
+    }
+    
 }

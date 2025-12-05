@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddScoped(sp => new HttpClient());
 builder.Services.AddScoped<IVideoService,VideoService>();
+builder.Services.AddScoped<IReviewService,ReviewService>();
 
 var app = builder.Build();
 
