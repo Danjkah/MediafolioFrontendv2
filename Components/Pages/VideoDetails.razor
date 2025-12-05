@@ -8,7 +8,7 @@
 
 <PageTitle>@(videoDetails?.Title ?? "Video Details")</PageTitle>
 <div class = "container mt-4">
-    <button class = "btn btn-secondary mb-3" @onclick="GoBack">
+    <button class = "btn btn-outline-primary mb-3" @onclick="GoBack">
         ← Back to Video Entries
     </button>
 
@@ -48,18 +48,26 @@
                     <span class="badge bg-primary mx-1">@tag </span>
                 }
                </div>
-            <hr class="mt-3"/>
-               <div>
+            <hr class="mt-3 mb-2"/>
+               
                <h4 class="text-body-secondary">Description:</h4>
-               @videoDetails.Description
-               </div>
+               
+               <div class = "mb-3 mt-2">@videoDetails.Description</div>
+               
 
 
-                <div>
-                
-                </div>
+                <small>
+                <strong>Number of episodes: </strong> @videoDetails.NumberOfEpisodes
+                </small>
+                <small>
+                <strong>Average Episode Length:</strong> @videoDetails.VideoDuration hour
+                </small>
 
-                <hr class="mt-3"/>
+                <small>
+                <strong>User Watch Time:</strong> @videoDetails.UserWatchTime hours
+                </small>
+
+                <hr class="mt-2 mb-2"/>
 
                 <small>
                Created at: @videoDetails.CreatedAt.ToString("MMMM dd, yyyy")
@@ -75,6 +83,16 @@
         </div>
     }
 
+<div class ="row mt-2">
+    <button @onclick="GoBack">
+    View Your Review on Entry
+    </button>
+
+    <button class = "mt-1 mb-2" @onclick="GoBack">
+    View Your Daily Logs
+    </button>
+
+</div>
 
 </div>
 
