@@ -84,11 +84,11 @@
     }
 
 <div class ="row mt-2">
-    <button @onclick="GoBack">
+    <button @onclick="() => NavigateToReviews(videoDetails.MediaObjectId)">
     View Your Review on Entry
     </button>
 
-    <button class = "mt-1 mb-2" @onclick="GoBack">
+    <button class = "mt-1 mb-2" @onclick="() => NavigateToLogs(videoDetails.MediaObjectId)">
     View Your Daily Logs
     </button>
 
@@ -141,5 +141,17 @@
     private void GoBack()
     {
         navigation.NavigateTo("/videoHome");
+    }
+
+    private void NavigateToReviews(int mediaIb)
+    {
+        Console.WriteLine("something is happening");
+        navigation.NavigateTo($"/reviews/{mediaIb}");
+    }
+
+    private void NavigateToLogs(int mediaIb)
+    {
+        Console.WriteLine("something is happening");
+        navigation.NavigateTo($"/logs/{mediaIb}");
     }
 }
