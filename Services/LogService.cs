@@ -58,9 +58,33 @@ namespace MediafolioFrontend.Services
             }
         }
 
-        public Task<DailyLogs> GetDailyLogById(int id)
+        public async Task<DailyLogs> GetDailyLogById(int id)
         {
-            throw new NotImplementedException();
+           try
+            {
+                var url = _apiUrl;
+                var response = await _httpClient.GetAsync($"{url}api/DailyLog/{id}");
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                DailyLogs? pageLoadResponse = JsonSerializer.Deserialize<DailyLogs>
+                (
+                    content,
+                    new JsonSerializerOptions {PropertyNameCaseInsensitive = true}
+                );
+
+                if (pageLoadResponse != null)
+                {
+                    return pageLoadResponse;
+                }
+                else
+                {
+                    return new DailyLogs();
+                }
+
+            } catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

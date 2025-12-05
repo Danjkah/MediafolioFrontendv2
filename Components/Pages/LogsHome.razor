@@ -94,9 +94,9 @@
         
         
     }
-    private void NavigateToDetails(int dailyLogId)
+    private void NavigateToDetails(int logId)
     {
         Console.WriteLine("something is happening");
-        navigation.NavigateTo($"/videoHome");
+        navigation.NavigateTo($"/logDetails/{logId}");
     }
 }
