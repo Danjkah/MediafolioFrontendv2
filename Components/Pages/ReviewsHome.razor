@@ -4,6 +4,8 @@
 @using MediafolioFrontend.Enums
 @rendermode InteractiveServer
 @inject IReviewService reviewService
+
+@inject IVideoService videoService
 @inject NavigationManager navigation
 
 
@@ -82,11 +84,24 @@
        await GetVideoReviews();
     }
 
-    private void GoBack(int videoId)
+    private async Task GoBack(int mediaId)
     {
 
-        navigation.NavigateTo($"/video/{videoId}");
+        //I need the video idea I have the media id
+        // I need to search through all my video objects and find the one with the given media id
 
+        var allVideos = await videoService.GetAllVideosAsync();
+        foreach(var video in allVideos)
+        {
+            @if (video.MediaObjectId == mediaId ){
+                var videoId = video.Id; 
+                Console.WriteLine(video.Id);
+                navigation.NavigateTo($"/video/{videoId}");
+                return;
+            }
+            
+        }
+        navigation.NavigateTo($"/videoHome");
     }
     
 }

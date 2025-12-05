@@ -118,12 +118,12 @@
         {
             @if (video.MediaObjectId == mediaId ){
                 var videoId = video.Id; 
+                Console.WriteLine(video.Id);
                 navigation.NavigateTo($"/video/{videoId}");
+                return;
             }
-            navigation.NavigateTo($"/videoHome");
+            
         }
-
-        
-
+        navigation.NavigateTo($"/videoHome");
     }
 }
