@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using MediafolioFrontend.Enums;
+using Mediafolio.Enums;
 
-namespace MediafolioFrontend.DTOs
+
+namespace Mediafolio.DTOs;
+
+public class UpdateVideoDto
 {
-    public class UpdateVideoDto
-    {
+        // Properties
         [Required(ErrorMessage = "The video must have a title")]
         [MaxLength(100, ErrorMessage = "The max length of the title is 100 characters")]
         public string Title { get; set; } = string.Empty;
@@ -30,5 +28,5 @@ namespace MediafolioFrontend.DTOs
 
         [Required(ErrorMessage = "There must be at least 1 tag")]
         public ICollection<VideoTagEnum> Tags { get; set; } = new List<VideoTagEnum>();
-    }
+    
 }
