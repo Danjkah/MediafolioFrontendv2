@@ -1,14 +1,15 @@
 @page "/videoHome"
 @using MediafolioFrontend.Models
 @using MediafolioFrontend.Services
+@using MediafolioFrontend.Enums
 
 @inject IVideoService videoService
 @inject NavigationManager Navigation
 
-<PageTitle>Search Movies</PageTitle>
+<PageTitle>Your Video Entries</PageTitle>
 
 <div class="container mt-4">
-    <h2>Search Movies</h2>
+    <h2>Your Video Entries</h2>
 
 
 
@@ -40,7 +41,7 @@
 
     @if(isLoading == false)
     {
-        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-3">
             @foreach(var video in videos)
             {
                 <div class = "col">
@@ -54,8 +55,17 @@
                             <h6 class="card-title">@video.Title</h6>
                             <p class="card-text">
                                 <small>Created at: @video.CreatedAt</small><br />
-                                <small>Updated at: @video.UpdatedAt</small> <br/>
-                                <small>Tags: @video.Tags</small>
+                                @if (video.UpdatedAt != DateTime.MinValue)
+                                {
+                                    <small>Updated at: @video.UpdatedAt</small> <br/>
+                                }
+
+                                <small>Tags: @foreach(var tag in video.Tags)
+                                    {
+                                        <small>@tag @(" ")  </small>
+                                    }
+                                </small> <br/>
+
                             </p>
                         </div>
                     </div>

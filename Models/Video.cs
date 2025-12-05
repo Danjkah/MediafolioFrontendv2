@@ -28,7 +28,7 @@ namespace MediafolioFrontend.Models
     public int NumberOfEpisodes { get; set; }
 
     [JsonPropertyName("tags")]
-    public ICollection<VideoTagEnum>? Tags { get; set; }
+    public List<VideoTagEnum>? Tags { get; set; }
 
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; set; }
