@@ -2,13 +2,20 @@
 @using MediafolioFrontend.Services
 @using MediafolioFrontend.Models
 @using MediafolioFrontend.Enums
+@using System.Threading.Tasks
 @rendermode InteractiveServer
 @inject ILogService logService
+@inject IVideoService videoService
 @inject NavigationManager navigation
 
 
 <PageTitle>Your Daily Log Entries</PageTitle>
 <div class="container mt-4">
+
+    <button class = "btn btn-outline-primary mb-3" @onclick="() => GoBack(mediaId)">
+        ← Back to Video Entries
+    </button>
+
 <h2>Your Daily Log Entries</h2>
 
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-3">
@@ -26,7 +33,7 @@
                         <div class = "card-body">
                             <h6 class="card-title">@dailyLog.CreatedAt.ToString("MMMM dd, yyyy 'at' hh:mm:tt")</h6>
                             <p class="card-text">
-                                <small>Usage Time: @dailyLog.UsageTime hours</small><br />
+                                <small>Usage Time: @dailyLog.UsageTime minutes</small><br />
                             </p>
                         </div>
                     </div>
@@ -71,7 +78,7 @@
             var loadResults = await logService.GetAllDailyLogs();
 
             dailyLogs = loadResults;
-            
+
             Console.WriteLine(dailyLogs);
             Console.WriteLine(dailyLogs[0].Content);
         }
@@ -88,15 +95,35 @@
 
     protected override async Task OnInitializedAsync()
     {
-       
-        
-       await GetDailyLogs();
-        
-        
+
+
+        await GetDailyLogs();
+
+
     }
     private void NavigateToDetails(int logId)
     {
         Console.WriteLine("something is happening");
         navigation.NavigateTo($"/logDetails/{logId}");
+    }
+
+    private async Task GoBack(int mediaId)
+    {
+
+        //I need the video idea I have the media id
+        // I need to search through all my video objects and find the one with the given media id
+
+        var allVideos = await videoService.GetAllVideosAsync();
+        foreach(var video in allVideos)
+        {
+            @if (video.MediaObjectId == mediaId ){
+                var videoId = video.Id; 
+                navigation.NavigateTo($"/video/{videoId}");
+            }
+            navigation.NavigateTo($"/videoHome");
+        }
+
+        
+
     }
 }
