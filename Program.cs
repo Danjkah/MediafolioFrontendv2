@@ -11,6 +11,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped(sp => new HttpClient());
 builder.Services.AddScoped<IVideoService,VideoService>();
 builder.Services.AddScoped<IReviewService,ReviewService>();
+builder.Services.AddScoped<ILogService,LogService>();
 
 var app = builder.Build();
 

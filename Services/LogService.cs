@@ -34,7 +34,7 @@ namespace MediafolioFrontend.Services
             try
             {
                 var url = _apiUrl;
-                var response = await _httpClient.GetAsync($"{url}api/Review/");
+                var response = await _httpClient.GetAsync($"{url}api/DailyLog/");
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
                 List<DailyLogs>? pageLoadResponse = JsonSerializer.Deserialize<List<DailyLogs>>

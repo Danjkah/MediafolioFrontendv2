@@ -3,10 +3,42 @@
 @using MediafolioFrontend.Models
 @using MediafolioFrontend.Enums
 @rendermode InteractiveServer
-@inject IVideoService videoService
+@inject ILogService logService
 @inject NavigationManager navigation
 
 
+<PageTitle>Your Daily Log Entries</PageTitle>
+<div class="container mt-4">
+<h2>Your Daily Log Entries</h2>
+
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-3">
+            @foreach(var dailyLog in dailyLogs)
+            {
+                @if(dailyLog.MediaObjectId == mediaId)
+                {
+                <div class = "col">
+                    <div class="card h-100 movie-card" @onclick="() => NavigateToDetails(dailyLog.Id)">
+
+                        <div class = "no-poster">
+                            <span>📽️</span>
+                        </div>
+
+                        <div class = "card-body">
+                            <h6 class="card-title">@dailyLog.CreatedAt.ToString("MMMM dd, yyyy 'at' hh:mm:tt")</h6>
+                            <p class="card-text">
+                                <small>Usage Time: @dailyLog.UsageTime hours</small><br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+
+
+
+
+</div>
 
 
 
@@ -17,4 +49,54 @@
     [Parameter]
     public int mediaId {get;set;} = int.MaxValue;
 
+
+    private List<DailyLogs> dailyLogs = new List<DailyLogs>();
+    private bool isLoading = false;
+
+    private string? errorMessage = null;
+
+    private bool hasSearched = false; 
+
+
+
+    private async Task GetDailyLogs()
+    {
+        try
+        {
+
+            isLoading = true;
+            errorMessage = null;
+            hasSearched = true; 
+
+            var loadResults = await logService.GetAllDailyLogs();
+
+            dailyLogs = loadResults;
+            
+            Console.WriteLine(dailyLogs);
+            Console.WriteLine(dailyLogs[0].Content);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+       
+        
+       await GetDailyLogs();
+        
+        
+    }
+    private void NavigateToDetails(int dailyLogId)
+    {
+        Console.WriteLine("something is happening");
+        navigation.NavigateTo($"/videoHome");
+    }
 }
