@@ -1,0 +1,20 @@
+@page "/logs/{mediaId:int}"
+@using MediafolioFrontend.Services
+@using MediafolioFrontend.Models
+@using MediafolioFrontend.Enums
+@rendermode InteractiveServer
+@inject IVideoService videoService
+@inject NavigationManager navigation
+
+
+
+
+
+
+@code
+
+{
+    [Parameter]
+    public int mediaId {get;set;} = int.MaxValue;
+
+}
