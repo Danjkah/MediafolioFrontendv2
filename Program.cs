@@ -1,10 +1,15 @@
 using MediafolioFrontend.Components;
+using MediafolioFrontend.Components.Pages;
+using MediafolioFrontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped(sp => new HttpClient());
+builder.Services.AddScoped<IVideoService,VideoService>();
 
 var app = builder.Build();
 
