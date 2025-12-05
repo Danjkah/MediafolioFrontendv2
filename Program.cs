@@ -12,6 +12,7 @@ builder.Services.AddScoped(sp => new HttpClient());
 builder.Services.AddScoped<IVideoService,VideoService>();
 builder.Services.AddScoped<IReviewService,ReviewService>();
 builder.Services.AddScoped<ILogService,LogService>();
+builder.Services.AddScoped<IVideoGameService,VideoGameService>();
 
 var app = builder.Build();
 

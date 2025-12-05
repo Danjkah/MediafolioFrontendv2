@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediafolioFrontend.Models;
-using MediaManager.Core.DTOs;
 using System.Text.Json;
+using MediafolioFrontend.DTOs;
 
 namespace MediafolioFrontend.Services
 {
