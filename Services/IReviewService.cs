@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Media_Manager.Core.DTOs;
 using MediafolioFrontend.Models;
+using MediafolioFrontend.DTOs;
 
 namespace MediafolioFrontend.Services
 {

@@ -2,12 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MediafolioFrontend.DTOs;
 
-public class CreateReviewDto
+public class UpdateReviewDto
 {
     public string Title { get; set; } = string.Empty;
     public string Content { get; set; } = string.Empty;
     [Range(1, 5, ErrorMessage = "must be between the range of 1 - 5")]
     public int Rating { get; set; }   
-    [Required]
-    public int MediaObjectId {get;set;}
+    public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 }

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Text.Json;
-using Media_Manager.Core.DTOs;
 using MediafolioFrontend.Models;
+using MediafolioFrontend.DTOs;
 
 namespace MediafolioFrontend.Services
 {

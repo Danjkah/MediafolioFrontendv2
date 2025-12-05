@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MediaManager.Core.DTOs;
+namespace MediafolioFrontend.DTOs;
 
 public class CreateDailyLogDto
 {

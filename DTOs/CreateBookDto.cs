@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Mediafolio.DTOs;
+namespace MediafolioFrontend.DTOs;
 
 public class CreateBookDto
 {

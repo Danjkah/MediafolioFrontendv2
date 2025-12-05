@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediafolioFrontend.Models;
 using MediafolioFrontend.DTOs;
-using MediaManager.Core.DTOs;
 
 namespace MediafolioFrontend.Services
 {
