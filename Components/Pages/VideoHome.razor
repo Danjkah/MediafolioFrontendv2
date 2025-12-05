@@ -1,0 +1,46 @@
+@page "/videoHome"
+@using MediafolioFrontend.Models
+@using MediafolioFrontend.Services
+
+@inject IVideoService videoService
+@inject NavigationManager Navigation
+
+<PageTitle>Search Movies</PageTitle>
+
+<div class="container mt-4">
+    <h2>Search Movies</h2>
+</div>
+
+
+@code {
+    private List<Video> videos = new List<Video>();
+    private bool isLoading = false;
+
+    private string? errorMessage = null; 
+
+
+
+    private async Task GetVideoEntries(){
+        try{
+
+            isLoading = true;
+            errorMessage = null;
+
+
+
+            var loadResults = await videoService.GetAllVideosAsync();
+
+            videos = loadResults; 
+        }catch (Exception ex){
+            throw;
+        }
+        
+    }
+    //https://stackoverflow.com/questions/61551404/in-blazor-how-to-call-a-function-at-page-load-event-name
+    @* protected override async Task OnInitializedAsync()
+    {
+        SomeStartupMethod();
+        await SomeStartupTask();
+    } *@
+}
+
