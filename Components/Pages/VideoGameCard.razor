@@ -1,0 +1,37 @@
+@using Mediafolio.Enums;
+@using Mediafolio.Models;
+@inject NavigationManager Navigation;
+
+<div class="col">
+    <div class="card h-100"> @* @onclick="() => NavigateToEditor(videoGameData)"> *@
+        <div class="card-body">
+            <h6 class="card-title">@videoGameData.Title</h6>
+            <p class="card-text">
+                <small>Estimated Play Time (hrs): @videoGameData.EstimatedPlayTime</small><br />
+                <small>User Play Time (hrs): @videoGameData.UserPlayTime</small><br />
+                <small>Description: @videoGameData.Description</small><br />
+                <small>Tags: </small>
+                @foreach(var tag in videoGameData.Tags)
+                {
+                    <small>@tag, </small>
+                }
+            </p>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public Mediafolio.Models.VideoGame? videoGameData {get;set;}
+
+    void NavigateToDailyLogs(int id)
+    {
+        Navigation.NavigateTo($"/dailylogs/{id}");
+    }
+
+    void NavigateToReview(int id)
+    {
+        Navigation.NavigateTo($"/review/{id}");
+    }
+}
