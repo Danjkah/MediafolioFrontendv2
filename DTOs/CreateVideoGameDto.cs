@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Mediafolio.Enums;
+using MediafolioFrontend.Enums;
 
-namespace Mediafolio.DTOs;
+namespace MediafolioFrontend.DTOs;
 
 public class CreateVideoGameDto
 {
